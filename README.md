@@ -1,6 +1,6 @@
 # Attack & Defense Challenge Setup
 
-This document provides instructions on setting up an attack and defense challenge using Docker and specific tools like the attacker/submitter from [S4DFarm](https://github.com/C4T-BuT-S4D/S4DFarm).
+This document provides instructions on setting up an attack and defense challenge using Docker and specific tools like the attacker/submitter from [S4DFarm](https://github.com/C4T-BuT-S4D/S4DFarm), the proxy [Firegex](https://github.com/Pwnzer0tt1/firegex.git)  and the analyzer [Tulip](https://github.com/OpenAttackDefenseTools/tulip.git).
 
 ## 1. Essential Docker Commands
 
@@ -54,7 +54,8 @@ docker ps
 docker ps -a
 ```
 
-## 2. Using Attacker/Submitter (S4DFarm)
+## 2. Attacker/Submitter (S4DFarm)
+DEFAULT PORT: 5137
 
 ### Installation
 ```bash
@@ -65,17 +66,72 @@ docker compose up --build -d
 
 ### Configuration
 Modify the configuration file to define competition details and endpoints.
+```bash
+# Add: RUN corepack use pnpm@8.x 
+code server/docker/front/Dockerfile
+
+# Define competition details and endpoints
+# Edit SYSTEM_PROTOCOL': 'ctf_prot'
+code server/app/config.py
+
+# Make a protocol
+cd server/app/protocols
+cp volgactf.py ctf_prot.py
+code ctf_prot.py
+cd ../../../
+```
+
+**Note:** Remember to change the password in both `compose.yaml` and `config.py` to ensure proper configuration and security.
+5432
+
+### Usage
+```bash
+docker compose up --build -d
+```
 
 ### Running an Attack
 ```bash
-python3 attacker.py --team TEAM_NAME --ip TARGET_IP
+cd client
+python3 start_sploit.py --server-url http://FARM-IP/ --server-pass YOUR_PASS exploit.py
 ```
+**Note:** Two important elements that should be included in your exploit script are: `#!/usr/bin/env python3` to specify the correct Python interpreter, and `print(flag, flush=True)` to ensure the flag is printed correctly by forcing the buffer to flush.
 
-### Submitting a Flag
+## 3. Analyzer (Tulip)
+DEFAULT PORT: 8000
+
+### Installation
 ```bash
-python3 submitter.py --team TEAM_NAME --flag FLAG_VALUE
+git clone https://github.com/OpenAttackDefenseTools/tulip.git
 ```
 
-## 3. Analyzer (to be completed)
+### Configuration
+```bash
+cd tulip
+cp .env.example .env
 
-## 4. Proxy (to be completed)
+code .env.example // configura impostazioni
+
+# Edit properly
+# TRAFFIC_DIR_HOST="./services/test_pcap, to redirect .pcap
+code services/configurations.py
+```
+
+### Usage
+```bash
+docker-compose up -d --build
+```
+
+## 4. Proxy (Firegex)
+DEFAULT PORT: 4444
+
+### Installation
+```bash
+git clone https://github.com/Pwnzer0tt1/firegex.git
+cd firegex
+python3 start.py
+```
+
+## Some useful command
+* `scp -i ~/.ssh/yourkey -r ./proxy masamune@IP:/tmp/source` Copy resource from your local to your vulnbox.
+* `passwd` Change your password.
+* `ssh-keygen -t ed25519` Generating an ssh public key and private key pair.
