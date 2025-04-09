@@ -61,17 +61,18 @@ DEFAULT PORT: 5137
 ```bash
 git clone https://github.com/C4T-BuT-S4D/S4DFarm.git
 cd S4DFarm
-docker compose up --build -d
+# FIX: RUN corepack use pnpm@8.x 
+code server/docker/front/Dockerfile
 ```
 
 ### Configuration
 Modify the configuration file to define competition details and endpoints.
 ```bash
-# Add: RUN corepack use pnpm@8.x 
-code server/docker/front/Dockerfile
-
 # Define competition details and endpoints
-# Edit SYSTEM_PROTOCOL': 'ctf_prot'
+# 'SYSTEM_PROTOCOL': 'your_prot',
+# 'SYSTEM_HOST': 'submit_ip',
+# 'SYSTEM_PORT': 'submit_port',
+# 'TEAM_TOKEN': 'your_team_token',
 code server/app/config.py
 
 # Make a protocol
@@ -82,7 +83,6 @@ cd ../../../
 ```
 
 **Note:** Remember to change the password in both `compose.yaml` and `config.py` to ensure proper configuration and security.
-5432
 
 ### Usage
 ```bash
@@ -92,6 +92,7 @@ docker compose up --build -d
 ### Running an Attack
 ```bash
 cd client
+# FARM-IP default: localhost:5137
 python3 start_sploit.py --server-url http://FARM-IP/ --server-pass YOUR_PASS exploit.py
 ```
 **Note:** Two important elements that should be included in your exploit script are: `#!/usr/bin/env python3` to specify the correct Python interpreter, and `print(flag, flush=True)` to ensure the flag is printed correctly by forcing the buffer to flush.
