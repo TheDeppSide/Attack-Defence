@@ -97,7 +97,7 @@ python3 start_sploit.py --server-url http://FARM-IP/ --server-pass YOUR_PASS exp
 **Note:** Two important elements that should be included in your exploit script are: `#!/usr/bin/env python3` to specify the correct Python interpreter, and `print(flag, flush=True)` to ensure the flag is printed correctly by forcing the buffer to flush.
 
 ## 3. Analyzer (Tulip)
-DEFAULT PORT: 8000
+DEFAULT PORT: 3000
 
 ### Installation
 ```bash
@@ -109,7 +109,8 @@ git clone https://github.com/OpenAttackDefenseTools/tulip.git
 cd tulip
 cp .env.example .env
 
-code .env.example // configura impostazioni
+# set up
+code .env.example
 
 # Edit properly
 # TRAFFIC_DIR_HOST="./services/test_pcap, to redirect .pcap
