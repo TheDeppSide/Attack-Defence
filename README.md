@@ -93,6 +93,7 @@ docker compose up --build -d
 ```bash
 cd client
 # FARM-IP default: localhost:5137
+scp psw.py root@91.99.54.223:../home/schiavo/S4DFarm/client/
 python3 start_sploit.py --server-url http://FARM-IP/ --server-pass YOUR_PASS exploit.py
 ```
 **Note:** Two important elements that should be included in your exploit script are: `#!/usr/bin/env python3` to specify the correct Python interpreter, and `print(flag, flush=True)` to ensure the flag is printed correctly by forcing the buffer to flush.
