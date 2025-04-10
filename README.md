@@ -54,6 +54,16 @@ docker ps
 docker ps -a
 ```
 
+### Cleaning
+```bash
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+docker rmi $(docker images -q)
+
+# To clean everythings
+docker system prune -a --volumes
+```
+
 ## 2. Attacker/Submitter (S4DFarm)
 DEFAULT PORT: 5137
 
