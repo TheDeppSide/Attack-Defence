@@ -1,4 +1,5 @@
 # Attack & Defense Challenge Setup
+sudo openvpn --config client.conf
 
 This document provides instructions on setting up an attack and defense challenge using Docker and specific tools like the attacker/submitter from [S4DFarm](https://github.com/C4T-BuT-S4D/S4DFarm), the proxy [Firegex](https://github.com/Pwnzer0tt1/firegex.git)  and the analyzer [Tulip](https://github.com/OpenAttackDefenseTools/tulip.git).
 
