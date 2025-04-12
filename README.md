@@ -102,10 +102,9 @@ docker compose up --build -d
 
 ### Running an Attack
 ```bash
-cd client
 # FARM-IP default: localhost:5137
-scp psw.py root@91.99.54.223:../home/schiavo/S4DFarm/client/
-python3 start_sploit.py --server-url http://FARM-IP/ --server-pass YOUR_PASS exploit.py
+scp exploit.py root@your_server_ip:path/to/S4DFarm/client/ (launch locally)
+python3 start_sploit.py --server-url http://FARM-IP/ --server-pass YOUR_PASS exploit.py (launch remotely)
 ```
 **Note:** Two important elements that should be included in your exploit script are: `#!/usr/bin/env python3` to specify the correct Python interpreter, and `print(flag, flush=True)` to ensure the flag is printed correctly by forcing the buffer to flush.
 
@@ -128,6 +127,25 @@ code .env.example
 # Edit properly
 # TRAFFIC_DIR_HOST="./services/test_pcap, to redirect .pcap
 code services/configurations.py
+```
+
+### Redirect pcap
+# Redirecting from vuln to server
+```bash
+#!/bin/bash
+
+while true
+do
+    timestamp=$(date +"%H-%M")
+    echo "Starting tcpdump..."
+    tcpdump -G 120 -i game -W 1 -w /tmp/dumps/capture-${timestamp}.pcap not port 22
+    echo "Sending the file..."
+    scp /tmp/dumps/capture-${timestamp}.pcap root@your_server_ip:path/to/tulip/services/test_pcap
+    echo "Removing the file..."
+    rm  /tmp/dumps/capture-${timestamp}.pcap
+done
+
+# If you are connecting to your server via ssh, pls note that you should run an sshkeygen on the vuln end load it serverside to ensure a proper connection.
 ```
 
 ### Usage
