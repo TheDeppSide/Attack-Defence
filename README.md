@@ -1,5 +1,4 @@
 # Attack & Defense Challenge Setup
-sudo openvpn --config client.conf
 
 This document provides instructions on setting up an attack and defense challenge using Docker and specific tools like the attacker/submitter from [S4DFarm](https://github.com/C4T-BuT-S4D/S4DFarm), the proxy [Firegex](https://github.com/Pwnzer0tt1/firegex.git)  and the analyzer [Tulip](https://github.com/OpenAttackDefenseTools/tulip.git).
 
@@ -166,3 +165,4 @@ python3 start.py
 * `scp -i ~/.ssh/yourkey -r ./proxy masamune@IP:/tmp/source` Copy resource from your local to your vulnbox.
 * `passwd` Change your password.
 * `ssh-keygen -t ed25519` Generating an ssh public key and private key pair.
+* `sudo openvpn --config client.conf` To establish a VPN connection using OpenVP
