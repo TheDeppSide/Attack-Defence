@@ -130,7 +130,7 @@ code services/configurations.py
 ```
 
 ### Redirect pcap
-# Redirecting from vuln to server
+Redirecting from vuln to server
 ```bash
 #!/bin/bash
 
@@ -145,7 +145,7 @@ do
     rm  /tmp/dumps/capture-${timestamp}.pcap
 done
 
-# If you are connecting to your server via ssh, pls note that you should run an sshkeygen on the vuln end load it serverside to ensure a proper connection.
+# If you are connecting to your server via SSH, please note that you should run `ssh-keygen` on the vulnerable end and load the public key server-side to ensure a proper connection.
 ```
 
 ### Usage
