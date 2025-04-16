@@ -144,9 +144,8 @@ do
     echo "Removing the file..."
     rm  /tmp/dumps/capture-${timestamp}.pcap
 done
-
-# If you are connecting to your server via SSH, please note that you should run `ssh-keygen` on the vulnerable end and load the public key server-side to ensure a proper connection.
 ```
+**Note:** If you are connecting to your server via SSH, please note that you should run `ssh-keygen` on the vulnerable end and load the public key server-side to ensure a proper connection.
 
 ### Usage
 ```bash
